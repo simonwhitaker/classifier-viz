@@ -21,11 +21,16 @@
             var bad_samples = samples * badness_rate;
             var good_samples = samples * (1 - badness_rate);
             
-            var tp = Math.round(bad_samples * accuracy);
-            var fn = Math.round(bad_samples - tp);
-            var tn = Math.round(good_samples * accuracy);
-            var fp = Math.round(good_samples - tn);
-        
+            /* simulation */
+            var tp, fn, tn, fp;
+            tp = fn = tn = fp = 0;
+            for (var bsi = 0; bsi < bad_samples; bsi++) {
+                (Math.random() <= accuracy) ? tp++ : fn++;
+            }
+            for (var gsi = 0; gsi < good_samples; gsi++) {
+                (Math.random() <= accuracy) ? tn++ : fp++;
+            }
+
             $("#fn").text(fn);
             $("#fp").text(fp);
             $("#tn").text(tn);
