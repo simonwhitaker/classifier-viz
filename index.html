@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Page Title</title>
+    <title>Binary Classifier Visualisation</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
 
@@ -14,12 +14,9 @@
 
     <script>
         function calculateValues() {
-            var samples = document.getElementById('samples').value;
-            var badness_rate = 1 / document.getElementById('badness_rate').value;
-            var accuracy = document.getElementById('accuracy').value / 100;
-            if (document.getElementById('accuracy').hidden) {
-            }
-            accuracy = $("#accuracy_slider").slider("value") / 100;
+            var samples = $("#samples").val();
+            var badness_rate = 1 / $("#badness_rate").val();
+            var accuracy = $("#accuracy_slider").slider("value") / 100;
         
             var bad_samples = samples * badness_rate;
             var good_samples = samples * (1 - badness_rate);
@@ -29,16 +26,16 @@
             var tn = Math.round(good_samples * accuracy);
             var fp = Math.round(good_samples - tn);
         
-            document.getElementById("fn").innerText = fn;
-            document.getElementById("fp").innerText = fp;
-            document.getElementById("tn").innerText = tn;
-            document.getElementById("tp").innerText = tp;
+            $("#fn").text(fn);
+            $("#fp").text(fp);
+            $("#tn").text(tn);
+            $("#tp").text(tp);
 
             $("#accuracy_value").text($("#accuracy_slider").slider("value"));
         }
 
         $( function() {
-            $("#accuracy_input_box").hide();
+            $("#accuracy_input_wrapper").hide();
             $("#accuracy_slider").slider({
                 value: 90,
                 slide: function(event, ui) {
@@ -97,9 +94,6 @@
                         <label for="accuracy">Accuracy:</label>
                     </td>
                     <td>
-                        <div id="accuracy_input_box">
-                            <input type="text" name="accuracy" id="accuracy" value="90" onchange="calculateValues();" />% (0-100)
-                        </div>
                         <div id="accuracy_slider"></div>
                     </td>
                     <td>
