@@ -15,7 +15,7 @@
     <script>
         function calculateValues() {
             var samples = document.getElementById('samples').value;
-            var badness_rate = document.getElementById('badness_rate').value / 100;
+            var badness_rate = 1 / document.getElementById('badness_rate').value;
             var accuracy = document.getElementById('accuracy').value / 100;
             if (document.getElementById('accuracy').hidden) {
             }
@@ -78,7 +78,7 @@
             <tbody>
                 <tr id="samples_wrapper" class="input_wrapper">
                     <td>
-                        <label for="samples">Samples</label>
+                        <label for="samples">Total samples:</label>
                     </td>
                     <td>
                         <input type="text" name="samples" id="samples" value="10000000" onchange="calculateValues();" />
@@ -86,15 +86,15 @@
                 </tr>
                 <tr id="badness_rate_wrapper" class="input_wrapper">
                     <td>
-                        <label for="badness_rate">Badness rate</label>
+                        <label for="badness_rate">Badness rate:</label>
                     </td>
                     <td>
-                        <input type="text" name="badness_rate" id="badness_rate" value="0.01" onchange="calculateValues();" />% (0-100)
+                        1 in <input type="text" name="badness_rate" id="badness_rate" value="10000" onchange="calculateValues();" />
                     </td>
                 </tr>
                 <tr id="accuracy_wrapper" class="input_wrapper">
                     <td>
-                        <label for="accuracy">Accuracy</label>
+                        <label for="accuracy">Accuracy:</label>
                     </td>
                     <td>
                         <div id="accuracy_input_box">
