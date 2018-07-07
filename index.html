@@ -16,7 +16,9 @@
         function calculateValues() {
             var samples = $("#samples").val();
             var badness_rate = 1 / $("#badness_rate").val();
-            var accuracy = $("#accuracy_slider").slider("value") / 100;
+            var accuracy = $("#accuracy_value").val() / 100;
+
+            $("#accuracy_slider").slider("value", $("#accuracy_value").val());
         
             var bad_samples = samples * badness_rate;
             var good_samples = samples * (1 - badness_rate);
@@ -30,8 +32,6 @@
             $("#fp").text(fp);
             $("#tn").text(tn);
             $("#tp").text(tp);
-
-            $("#accuracy_value").text($("#accuracy_slider").slider("value"));
         }
 
         $( function() {
@@ -39,6 +39,7 @@
             $("#accuracy_slider").slider({
                 value: 90,
                 slide: function(event, ui) {
+                    $("#accuracy_value").val($("#accuracy_slider").slider("value"));
                     calculateValues();
                 }
             });
@@ -97,7 +98,7 @@
                         <div id="accuracy_slider"></div>
                     </td>
                     <td>
-                        <div id="accuracy_value"></div>
+                        <input name="accuracy_value" id="accuracy_value" value="90" onchange="calculateValues();" />
                     </td>
                 </tr>
             </tbody>
