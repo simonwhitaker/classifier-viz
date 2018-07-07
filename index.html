@@ -7,7 +7,46 @@
     <title>Page Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-    <script src="main.js"></script>
+
+    <link rel="stylesheet" href="jquery-ui-1.12.1.custom/jquery-ui.min.css">
+    <script src="jquery-ui-1.12.1.custom/external/jquery/jquery.js"></script>
+    <script src="jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+
+    <script>
+        function calculateValues() {
+            var samples = document.getElementById('samples').value;
+            var badness_rate = document.getElementById('badness_rate').value / 100;
+            var accuracy = document.getElementById('accuracy').value / 100;
+            if (document.getElementById('accuracy').hidden) {
+            }
+            accuracy = $("#accuracy_slider").slider("value") / 100;
+        
+            var bad_samples = samples * badness_rate;
+            var good_samples = samples * (1 - badness_rate);
+            
+            var tp = Math.round(bad_samples * accuracy);
+            var fn = Math.round(bad_samples - tp);
+            var tn = Math.round(good_samples * accuracy);
+            var fp = Math.round(good_samples - tn);
+        
+            document.getElementById("fn").innerText = fn;
+            document.getElementById("fp").innerText = fp;
+            document.getElementById("tn").innerText = tn;
+            document.getElementById("tp").innerText = tp;
+
+            $("#accuracy_value").text($("#accuracy_slider").slider("value"));
+        }
+
+        $( function() {
+            $("#accuracy_input_box").hide();
+            $("#accuracy_slider").slider({
+                value: 90,
+                slide: function(event, ui) {
+                    calculateValues();
+                }
+            });
+        });
+    </script>
 </head>
 
 <body onload="calculateValues();">
@@ -35,7 +74,7 @@
         </table>
     </div>
     <div>
-        <table>
+        <table class="parameters">
             <tbody>
                 <tr id="samples_wrapper" class="input_wrapper">
                     <td>
@@ -50,14 +89,22 @@
                         <label for="badness_rate">Badness rate</label>
                     </td>
                     <td>
-                        <input type="text" name="badness_rate" id="badness_rate" value="0.01" onchange="calculateValues();" />% (0-100)</td>
+                        <input type="text" name="badness_rate" id="badness_rate" value="0.01" onchange="calculateValues();" />% (0-100)
+                    </td>
                 </tr>
                 <tr id="accuracy_wrapper" class="input_wrapper">
                     <td>
                         <label for="accuracy">Accuracy</label>
                     </td>
                     <td>
-                        <input type="text" name="accuracy" id="accuracy" value="90" onchange="calculateValues();" />% (0-100)</td>
+                        <div id="accuracy_input_box">
+                            <input type="text" name="accuracy" id="accuracy" value="90" onchange="calculateValues();" />% (0-100)
+                        </div>
+                        <div id="accuracy_slider"></div>
+                    </td>
+                    <td>
+                        <div id="accuracy_value"></div>
+                    </td>
                 </tr>
             </tbody>
         </table>

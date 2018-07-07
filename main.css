@@ -6,6 +6,10 @@ table.results {
     border-collapse: collapse;
 }
 
+table.parameters td {
+    padding: 10pt;
+}
+
 table.results, .results td, .results th {
     border: 1px solid darkgray;
 }
