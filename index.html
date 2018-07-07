@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="main.js"></script>
+</head>
+
+<body onload="calculateValues();">
+    <div id="visualisation">
+        <table class="results">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Actually good</th>
+                    <th>Actually bad</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th>Classified as good</th>
+                    <td id="tn" class="true negative">True negatives</td>
+                    <td id="fn" class="false negative">False negatives</td>
+                </tr>
+                <tr>
+                    <th>Classified as bad</th>
+                    <td id="fp" class="false positive">False positives</td>
+                    <td id="tp" class="true positive">True positives</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div>
+        <table>
+            <tbody>
+                <tr id="samples_wrapper" class="input_wrapper">
+                    <td>
+                        <label for="samples">Samples</label>
+                    </td>
+                    <td>
+                        <input type="text" name="samples" id="samples" value="10000000" onchange="calculateValues();" />
+                    </td>
+                </tr>
+                <tr id="badness_rate_wrapper" class="input_wrapper">
+                    <td>
+                        <label for="badness_rate">Badness rate</label>
+                    </td>
+                    <td>
+                        <input type="text" name="badness_rate" id="badness_rate" value="0.01" onchange="calculateValues();" />% (0-100)</td>
+                </tr>
+                <tr id="accuracy_wrapper" class="input_wrapper">
+                    <td>
+                        <label for="accuracy">Accuracy</label>
+                    </td>
+                    <td>
+                        <input type="text" name="accuracy" id="accuracy" value="90" onchange="calculateValues();" />% (0-100)</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>

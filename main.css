@@ -1,0 +1,31 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+table.results {
+    border-collapse: collapse;
+}
+
+table.results, .results td, .results th {
+    border: 1px solid darkgray;
+}
+
+.results td {
+    width: 160pt;
+    height: 60pt;
+    text-align: center;
+}
+
+tbody th {
+    text-align: right;
+}
+
+td.true {
+    background-color: #9f9;
+    font-weight: 700;
+}
+
+td.false {
+    background-color: #f99;
+    font-weight: 300;
+}
